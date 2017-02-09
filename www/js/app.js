@@ -8,7 +8,7 @@
 var db;
 var marketplace = angular.module('marketplace', ['ionic', 'ngCordova', 'marketplace.controllers']);
 
-marketplace.run(function($ionicPlatform) {
+marketplace.run(function($ionicPlatform, $log) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,14 +22,17 @@ marketplace.run(function($ionicPlatform) {
       StatusBar.styleDefault();
     }
 
-    try {
+    /*try {
       db = $cordovaSQLite.openDB({name:"marketplace.db",location:'default'});
     } catch (error) {
-      alert(error);
+      $log.error(error);
     }
 
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, Title, reduction INT, duration INT, quantity INT)');
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR, password VARCHAR)');
-
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, Title, reduction INT, duration INT, quantity INT FOREIGN KEY )');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR, password VARCHAR)');*/
   });
+})
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.backButton.previousTitleText(false)
+  $ionicConfigProvider.backButton.text('');
 });
