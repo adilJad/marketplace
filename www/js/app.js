@@ -28,8 +28,8 @@ marketplace.run(function($ionicPlatform) {
       alert(error);
     }
 
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, reduction TEXT, duration, quantity)');
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR)');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, Title, reduction INT, duration INT, quantity INT)');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR, password VARCHAR)');
 
   });
 });
