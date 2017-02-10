@@ -22,14 +22,19 @@ marketplace.run(function($ionicPlatform, $log) {
       StatusBar.styleDefault();
     }
 
-    /*try {
-      db = $cordovaSQLite.openDB({name:"marketplace.db",location:'default'});
+    
+    try {
+      db = $rootscope.db = $cordovaSQLite.openDB({name:"marketplace.db",location:'default'});
     } catch (error) {
       $log.error(error);
     }
 
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, Title, reduction INT, duration INT, quantity INT FOREIGN KEY )');
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR, password VARCHAR)');*/
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, Title, reduction INT, duration INT, quantity INT, FOREIGN KEY(creator_id) REFERENCES Users(idUser))');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR, password VARCHAR, is)');
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Users_Vouchers (id INTEGER PRIMARY KEY AUTOINCREMENT, FOREIGN KEY(users_idUser) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))');
+
+    //populate database
+    
   });
 })
 .config(function($ionicConfigProvider) {
