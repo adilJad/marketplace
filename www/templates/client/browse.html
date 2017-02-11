@@ -1,22 +1,23 @@
 <ion-view view-title="Browse" hide-back-button="true">
 	<ion-content>
-		<div class="list card">
 
-  <div class="item item-avatar">
-    <img src="mcfly.jpg">
-    <h2>The hipster bakery</h2>
-    <p>Expires: November 05, 1955</p>
+  <div class="list card" ng-repeat="voucher in data.vouchers">
+    <div class="item item-avatar">
+      <img ng-src="img/{{voucher.firstname}}_{{voucher.lastname}}.jpeg">
+      <h2>{{voucher.title}}</h2>
+      <p>Expires in {{voucher.duration}} Hours</p>
+      <p>{{voucher.store}}</p>
+    </div>
+
+    <div class="item item-body">
+      <p>
+        -{{voucher.reduction}}
+      </p>
+      <p>
+        <a href="#" class="subdued">Request</a>
+        <a href="#" class="subdued">{{voucher.quantity}} left</a>
+      </p>
+    </div>
   </div>
-
-  <div class="item item-body">
-    <p>
-      Get a discount of 20% on all gluten-free bread!
-    </p>
-    <p>
-      <a href="#" class="subdued">Request</a>
-    </p>
-  </div>
-
-</div>
 	</ion-content>
 </ion-view>
