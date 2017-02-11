@@ -8,7 +8,7 @@
 
 var marketplace = angular.module('marketplace', ['ionic', 'ngCordova', 'marketplace.controllers']);
 
-marketplace.run(function($ionicPlatform, $log, $rootScope, MaketplaceStorage) {
+marketplace.run(function($ionicPlatform, $log, $rootScope, MarketplaceStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,21 +22,21 @@ marketplace.run(function($ionicPlatform, $log, $rootScope, MaketplaceStorage) {
       StatusBar.styleDefault();
     }
 
-    MaketplaceStorage.createDb("marketplace.db");
-    MaketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR UNIQUE, password VARCHAR, isLoggedIn INTEGER)', []);
-    MaketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, reduction INTEGER, duration INTEGER, quantity INTEGER, creator_id INTEGER, FOREIGN KEY(creator_id) REFERENCES Users(idUser))', []);
-    MaketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Users_Vouchers (id INTEGER PRIMARY KEY AUTOINCREMENT, users_idUser INTEGER, vouchers_idVoucher INTEGER, FOREIGN KEY(users_idUser) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))', []);
+    MarketplaceStorage.createDb("marketplace.db");
+    MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firsname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR UNIQUE, password VARCHAR, isLoggedIn INTEGER)', []);
+    MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, shop VARCHAR, reduction INTEGER, duration INTEGER, quantity INTEGER, creator_id INTEGER, FOREIGN KEY(creator_id) REFERENCES Users(idUser))', []);
+    MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Users_Vouchers (id INTEGER PRIMARY KEY AUTOINCREMENT, users_idUser INTEGER, vouchers_idVoucher INTEGER, FOREIGN KEY(users_idUser) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))', []);
 
     //populate database
     //some users
-    MaketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Adam", "Bradly", "adam@bradly.com", "adam.bradly", "password", 0]);
-    MaketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Ben", "Sperry", "ben@sperry.com", "ben.sperry", "password", 0]);
-    MaketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Brandy", "Carney", "brandy@carney.com", "brandy.carney", "password", 0]);
-    MaketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Bryan", "Oliver", "bryan@oliver.com", "bryan.oliver", "password", 0]);
-    MaketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Dan", "Bucholtz", "dan@bucholtz.com", "dan.bucholtz", "password", 0]);
+    MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Adam", "Bradly", "adam@bradly.com", "adam.bradly", "password", 0]);
+    MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Ben", "Sperry", "ben@sperry.com", "ben.sperry", "password", 0]);
+    MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Brandy", "Carney", "brandy@carney.com", "brandy.carney", "password", 0]);
+    MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Bryan", "Oliver", "bryan@oliver.com", "bryan.oliver", "password", 0]);
+    MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firsname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', ["Dan", "Bucholtz", "dan@bucholtz.com", "dan.bucholtz", "password", 0]);
 
     //Vouchers
-    MaketplaceStorage.executeQuery('INSERT OR IGNORE INTO Vouchers(title, reduction, duration, quantity, creator_id) VALUES(?, ?, ?, ?, ?)', ["Adam", "Bradly", 48, 25, 2]);
+    MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Vouchers(title, reduction, duration, quantity, creator_id) VALUES(?, ?, ?, ?, ?)', ["Adam", "Bradly", 48, 25, 2]);
   })
 })
 .config(function($ionicConfigProvider) {

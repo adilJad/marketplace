@@ -2,12 +2,12 @@
 * @Author: jad
 * @Date:   2017-02-09 12:41:15
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-11 15:17:46
+* @Last Modified time: 2017-02-11 15:37:09
 */
 
 'use strict';
 
-marketplace.factory("MaketplaceStorage", function($cordovaSQLite, $q, $log) {
+marketplace.factory("MarketplaceStorage", function($cordovaSQLite, $q, $log) {
 
 	var db = null;
 
