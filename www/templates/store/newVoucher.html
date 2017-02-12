@@ -1,3 +1,29 @@
-<ion-view>
-	<ion-content></ion-content>
+<ion-view view-title="New Voucher">
+	<ion-content>
+		<div class="list">
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Shop</span>
+				<input type="text" placeholder="My Sweet Shop" ng-model="voucherData.shop">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Title</span>
+				<input type="text" placeholder="Everybody gets a discount" ng-model="voucherData.title">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">quantity</span>
+				<input type="number" placeholder="50" ng-model="voucherData.quantity">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Reduction</span>
+				<input type="number" placeholder="-75%" ng-model="voucherData.reduction">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Duration</span>
+				<input type="password" placeholder="24 hours" ng-model="voucherData.duration">
+			</label>
+		</div>
+		<div class="padding">
+			<button class="button button-block button-stable" ng-click="createVoucher()">Create voucher</button>
+		</div>
+	</ion-content>
 </ion-view>
