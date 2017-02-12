@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 10:27:47
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 09:55:20
+* @Last Modified time: 2017-02-12 19:16:41
 */
 
 'use strict';
@@ -20,7 +20,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/login.html',
 				controller: 'LoginController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/clientMenu.html'
+		    }
 		}
     })
     .state('app.signup', {
@@ -29,7 +32,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/signup.html',
 				controller: 'SignupController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/clientMenu.html'
+		    }
 		}
     })
     .state('app.browse', {
@@ -38,7 +44,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/client/browse.html',
 				controller: 'BrowseController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/clientMenu.html'
+		    }
 		}
     })
    .state('app.trade', {
@@ -47,7 +56,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/client/trade.html',
 				controller: 'TradeController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/clientMenu.html'
+		    }
 		}
     })
     .state('app.vouchers', {
@@ -56,7 +68,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/client/vouchers.html',
 				controller: 'VouchersController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/clientMenu.html'
+		    }
 		}
     })
     .state('app.settings', {
@@ -65,7 +80,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/client/settings.html',
 				controller: 'SettingsController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/clientMenu.html'
+		    }
 		}
     })
     .state('app.newVoucher', {
@@ -74,7 +92,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/store/newVoucher.html',
 				controller: 'NewVoucherController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/shopMenu.html'
+		    }
 		}
     })
     .state('app.myVouchers', {
@@ -83,7 +104,10 @@ marketplace.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/store/myVouchers.html',
 				controller: 'MyVouchersController'
-			}
+			},
+			'menuList': {
+		      	templateUrl:'templates/menus/shopMenu.html'
+		    }
 		}
     })
   // if none of the above states are matched, use this as the fallback

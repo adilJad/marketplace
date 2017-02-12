@@ -17,28 +17,10 @@
     <ion-header-bar class="bar-stable">
       <!-- <h1 class="title">Left</h1> -->
     </ion-header-bar>
-    <ion-content>
-      <ion-list>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/vouchers">
-          Vouchers
-        </ion-item>
-        <ion-item menu-close href="#/app/trade">
-          Trade
-        </ion-item>
-        <ion-item menu-close href="#/app/settings">
-          Settings
-        </ion-item>
-        <!-- <ion-item menu-close href="#/app/playlists">
-          Switch to store
-        </ion-item> -->
-      </ion-list>
-    </ion-content>
-    <ion-footer-bar menu-close align-title="center" style="background-color: #808080 !important;" ui-sref="app.newVoucher">
+    <ion-nav-view name="menuList" id="menu"></ion-nav-view>
+    <ion-footer-bar menu-close align-title="center" style="background-color: #808080 !important;" ng-click="switchToStore()">
       <h1 class="title" style="color: #FFF;">
-        Switch to store
+        {{buttonTitle}}
       </h1>
     </ion-footer-bar>
   </ion-side-menu>

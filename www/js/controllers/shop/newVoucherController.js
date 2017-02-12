@@ -2,12 +2,12 @@
 * @Author: jad
 * @Date:   2017-02-09 11:03:04
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 17:23:38
+* @Last Modified time: 2017-02-12 18:40:26
 */
 
 'use strict';
 
-controllers.controller('NewVoucherController', function($scope, ) {
+controllers.controller('NewVoucherController', function($scope, MarketplaceStorage, $state,$ionicSideMenuDelegate, $rootScope) {
 	$scope.$on('$ionicView.beforeEnter', function(event, config) {
 		$ionicSideMenuDelegate.canDragContent(true);
 		$rootScope.showMenuIcon = true;
