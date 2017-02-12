@@ -11,3 +11,11 @@
 	text-decoration: none;
 	padding: 5px;
 }
+
+.delete-btn{
+	background-color: #FF9C00;
+	color: #FFF;
+	border-radius: 5px; 
+	text-decoration: none;
+	padding: 5px;
+}

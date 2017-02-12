@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 12:41:15
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 09:41:23
+* @Last Modified time: 2017-02-12 14:34:09
 */
 
 'use strict';
@@ -19,7 +19,13 @@ marketplace.factory("MarketplaceStorage", function($cordovaSQLite, $q, $log) {
 		var deffered = $q.defer();
 		$cordovaSQLite.execute(db, query, values)
 		.then(function(res) {
-			$log.debug(res);
+			if(res.rows.length) {
+				for (var i = 0; i < res.rows.length; i++) {
+					$log.debug(res.rows.item(i));
+				}
+			} else{
+				$log.debug(res);
+			}
 			deffered.resolve(res);
 	    }, function(err) {
 	    	$log.log(query);
