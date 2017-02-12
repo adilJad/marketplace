@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 11:10:13
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-11 10:55:14
+* @Last Modified time: 2017-02-12 10:24:54
 */
 
 'use strict';
@@ -17,10 +17,10 @@ controllers.controller("SignupController", function($scope, $state, $log, $ionic
 
 	$scope.signup = function() {
 		$log.debug($scope.signupData);
-		var query = "INSERT INTO Users VALUES(?, ?, ?, ?, ?, ?)";
-		$cordovaSQLite.execute(db, query, $scope.signupData.fisrtName, $scope.signupData.lastName, $scope.signupData.email, $scope.signupData.username, $scope.signupData.password, 0).then(function(res) {
-			$cordovaToast.show("user created successfully!", 'long', 'bottom');
-		})
+		MarketplaceStorage.executeQuery('INSERT OR IGNORE INTO Users(firstname, lastname, email , username, password, isLoggedIn) VALUES(?, ?, ?, ?, ?, ?)', [$scope.signupData.fisrtName, $scope.signupData.lastName, $scope.signupData.email, $scope.signupData.username, $scope.signupData.password, 0]).then(function() {
+			$cordovaToast.show("user created successfully! please log in", 'long', 'bottom');
+		});
+		
 
 	}
 })
