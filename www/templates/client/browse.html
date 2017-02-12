@@ -1,21 +1,20 @@
 <ion-view view-title="Browse" hide-back-button="true">
 	<ion-content>
 
-  <div class="list card" ng-repeat="voucher in data.vouchers">
+  <div class="list card" ng-repeat="voucher in data.vouchers track by $index">
     <div class="item item-avatar">
       <img ng-src="img/{{voucher.firstname}}_{{voucher.lastname}}.jpeg">
-      <h2>{{voucher.title}}</h2>
+      <h2>{{voucher.shop}}</h2>
       <p>Expires in {{voucher.duration}} Hours</p>
-      <p>{{voucher.store}}</p>
     </div>
-
     <div class="item item-body">
+      <p>{{voucher.title}}</p>
       <p class="reduction">
-        -{{voucher.reduction}}
+        -{{voucher.reduction}}%
       </p>
       <p>
-        <a href="#" class="subdued">Request</a>
-        <a href="#" class="subdued">{{voucher.quantity}} left</a>
+        <a class="request-btn" ng-click="requestVoucher($index)" class="subdued">Request</a>
+        <a class="subdued">{{voucher.quantity}} left</a>
       </p>
     </div>
   </div>

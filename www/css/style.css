@@ -1,4 +1,13 @@
 /* Empty. Add your own CSS if you like */
 .reduction {
-	
+	text-align: center;
+	font-size: 7vh !important;	
+}
+
+.request-btn{
+	background-color: #FF9C00;
+	color: #FFF;
+	border-radius: 5px; 
+	text-decoration: none;
+	padding: 5px;
 }
