@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 11:09:45
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 15:10:45
+* @Last Modified time: 2017-02-12 15:20:51
 */
 
 'use strict';
@@ -15,7 +15,7 @@ controllers.controller("VouchersController", function($scope, $ionicSideMenuDele
 		MarketplaceStorage.executeQuery("SELECT * FROM Users WHERE isLoggedIn = 1").then(function(res) {
 			$scope.data = {};
 			$scope.data.user = res.rows.item(0);
-			MarketplaceStorage.executeQuery("SELECT uv.id, title, shop, reduction, quantity, duration, creator_id, firstname, lastname, idUser FROM Vouchers AS v, Users AS u, Users_Vouchers AS uv WHERE uv.users_idUser = u.idUser AND v.idVoucher = uv.vouchers_idVoucher AND u.idUser = ?", [$scope.data.user.idUser]).then(function(res) {
+			MarketplaceStorage.executeQuery("SELECT uv.id, v.idVoucher, title, shop, reduction, quantity, duration, creator_id, firstname, lastname, idUser FROM Vouchers AS v, Users AS u, Users_Vouchers AS uv WHERE uv.users_idUser = u.idUser AND v.idVoucher = uv.vouchers_idVoucher AND u.idUser = ?", [$scope.data.user.idUser]).then(function(res) {
 				$scope.data.vouchers = [];
 				for (var i = 0; i < res.rows.length; i++) {
 					$scope.data.vouchers.push(res.rows.item(i));
@@ -37,8 +37,16 @@ controllers.controller("VouchersController", function($scope, $ionicSideMenuDele
 					var q = $scope.data.vouchers[i].quantity + 1;
 					var id = $scope.data.vouchers[i].idVoucher;
 					$scope.data.vouchers.splice(i, 1);
-					MarketplaceStorage.executeQuery("UPDATE Vouchers SET quantity = ? WHERE idVoucher = ?", [q, id]);
-				})
+					console.log(q, id);
+					MarketplaceStorage.executeQuery("UPDATE Vouchers SET quantity = ? WHERE idVoucher = ?", [q, id]).then(function(res) {
+						console.log(res);
+
+					}, function(err) {
+						console.log(err);
+					});
+				}, function(err) {
+					console.log(err);
+				});
 			}
 		});
 	}
