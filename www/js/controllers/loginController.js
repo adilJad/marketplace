@@ -2,12 +2,12 @@
 * @Author: jad
 * @Date:   2017-02-09 10:36:03
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 09:55:44
+* @Last Modified time: 2017-02-12 15:34:14
 */
 
 'use strict';
 controllers.controller("LoginController", function($scope, $state, $ionicSideMenuDelegate, $rootScope, $log, MarketplaceStorage, $cordovaToast, ObjectService) {
-	$scope.$on('$ionicView.enter', function(e) {
+	$scope.$on('$ionicView.enter', function(event, config) {
 		$ionicSideMenuDelegate.canDragContent(false);
 		$rootScope.showMenuIcon = false;
 	});

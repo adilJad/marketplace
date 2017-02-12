@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 11:09:45
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 15:20:51
+* @Last Modified time: 2017-02-12 15:40:48
 */
 
 'use strict';
@@ -37,15 +37,8 @@ controllers.controller("VouchersController", function($scope, $ionicSideMenuDele
 					var q = $scope.data.vouchers[i].quantity + 1;
 					var id = $scope.data.vouchers[i].idVoucher;
 					$scope.data.vouchers.splice(i, 1);
-					console.log(q, id);
 					MarketplaceStorage.executeQuery("UPDATE Vouchers SET quantity = ? WHERE idVoucher = ?", [q, id]).then(function(res) {
-						console.log(res);
-
-					}, function(err) {
-						console.log(err);
 					});
-				}, function(err) {
-					console.log(err);
 				});
 			}
 		});
