@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 10:54:00
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 19:28:50
+* @Last Modified time: 2017-02-12 19:56:28
 */
 
 'use strict';
@@ -27,11 +27,11 @@ controllers.controller('AppController', function($scope, $timeout, MarketplaceSt
   		if($scope.inClientMode) {
 		  	MarketplaceStorage.executeQuery("SELECT * FROM Users WHERE isLoggedIn = 1").then(function(res) {
 				$scope.user = res.rows.item(0);
-		  		MarketplaceStorage.executeQuery("SELECT COUNT(*) AS c FROM Vouchers WHERE creator_id = ?", $scope.user.idUser).then(function(res) {
+		  		MarketplaceStorage.executeQuery("SELECT COUNT(*) AS c FROM Vouchers WHERE creator_id = ?", [$scope.user.idUser]).then(function(res) {
 		  			if(res.rows.item(0).c == 0) {
 		  				$state.go("app.newVoucher");
 		  			} else {
-		  				$state.go("app.myVoucher");
+		  				$state.go("app.myVouchers");
 		  			}
 		  		});
 		  	});

@@ -1,5 +1,20 @@
 <ion-view view-title="My Vouchers">
 	<ion-content>
-		
+		<div class="list card" ng-repeat="voucher in data.vouchers track by $index">
+			<div class="item">
+				<h2>{{voucher.shop}}</h2>
+				<p>Expires in {{voucher.duration}} Hours</p>
+			</div>
+			<div class="item item-body">
+				<p>{{voucher.title}}</p>
+				<p class="reduction">
+					-{{voucher.reduction}}%
+				</p>
+				<p>
+					<a class="delete-btn" ng-click="deleteVoucher($index)" class="subdued">Delete</a>
+					<a class="subdued">{{voucher.quantity}} left</a>
+				</p>
+			</div>
+		</div>
 	</ion-content>
 </ion-view>

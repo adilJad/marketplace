@@ -1,5 +1,10 @@
 <ion-view view-title="Claimed Vouchers">
 	<ion-content>
+		<div class="padding empty" ng-show="data.vouchers.length == 0">
+			<p>You have no claimed Vouchers</p>
+			<p>Go to browse to the available Vouchers</p>
+			<a class="button button-positive button-block" href="#/app/browse">Browse</a>
+		</div>
 		<div class="list card" ng-repeat="voucher in data.vouchers track by $index">
 			<div class="item item-avatar">
 				<img ng-src="img/{{voucher.firstname}}_{{voucher.lastname}}.jpeg">
