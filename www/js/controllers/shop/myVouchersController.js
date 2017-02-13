@@ -2,12 +2,12 @@
 * @Author: jad
 * @Date:   2017-02-09 11:01:40
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 19:38:19
+* @Last Modified time: 2017-02-12 20:15:28
 */
 
 'use strict';
 
-controllers.controller('MyVouchersController', function($scope, $ionicSideMenuDelegate, $rootScope, MarketplaceStorage) {
+controllers.controller('MyVouchersController', function($scope, $ionicSideMenuDelegate, $rootScope, MarketplaceStorage, $ionicPopup) {
 	$scope.$on('$ionicView.beforeEnter', function(event, config) {
 		config.enableBack = false;
 		$ionicSideMenuDelegate.canDragContent(true);
@@ -33,7 +33,7 @@ controllers.controller('MyVouchersController', function($scope, $ionicSideMenuDe
      	});
 		$scope.confirmDelete.then(function(res) {
 			if(res) {
-				MarketplaceStorage.executeQuery("DELETE FROM Vouchers WHERE id = ? ", [$scope.data.vouchers[i].idVoucher]).then(function(res) {
+				MarketplaceStorage.executeQuery("DELETE FROM Vouchers WHERE idVoucher = ? ", [$scope.data.vouchers[i].idVoucher]).then(function(res) {
 
 					var q = $scope.data.vouchers[i].quantity + 1;
 					var id = $scope.data.vouchers[i].idVoucher;

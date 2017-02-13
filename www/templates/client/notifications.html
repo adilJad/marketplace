@@ -1,0 +1,9 @@
+<ion-view view-title="Notifications">
+	<ion-content has-subheader="false">
+		<ul class="list">
+			<li class="item" ng-repeat="n in data.notifications track by $index" ng-click="action($index)" ng-class="{'msg-active': n.isRead == 0}">
+			  {{n.message}}
+			</li>
+		</ul>
+	</ion-content>
+</ion-view>

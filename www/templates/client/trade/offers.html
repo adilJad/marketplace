@@ -1,0 +1,25 @@
+<ion-view view-title="Offers">
+	<ion-nav-buttons side="secondary">
+		<button class="button button-icon ion-plus-round" ng-click="newOffer()"></button>
+	</ion-nav-buttons>
+	<ion-content>
+
+		<div class="empty" ng-show="data.offers.length == 0">There are no offers at the moment</div>
+		<div class="list card" ng-repeat="o in data.offers track by $index">
+		    <div class="item item-avatar">
+		      <img ng-src="img/{{o.firstname}}_{{o.lastname}}.jpeg">
+		      <h2>{{o.firstname}} {{o.lastname}}</h2>
+		      <!-- <p>Expires in {{voucher.duration}} Hours</p> -->
+		    </div>
+		    <div class="item item-body">
+		      <p>has offered a Voucher for the shop: "{{o.shop}}" with a discount of </p>
+		      <p class="reduction">
+		        -{{o.reduction}}%
+		      </p>
+		      <p>
+		        <a class="request-btn" ng-click="requestOffer($index)" class="subdued">Request</a>
+		      </p>
+		    </div>
+		</div>
+	</ion-content>
+</ion-view>

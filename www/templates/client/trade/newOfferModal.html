@@ -1,0 +1,21 @@
+<ion-modal-view ng-controller="NewOfferController">
+	<ion-header-bar class= "headerModal bar bar-header">
+		<h2 class="title">Publish new offer</h2>
+		<button class="button button-clear btn-cancel" ng-click="hideModal()">Cancel</button>
+	</ion-header-bar>
+	<ion-content has-subheader="false">
+		<div class="list">
+			<label class="item item-input item-select">
+			<div class="input-label">
+				Vouchers
+			</div>
+			<select ng-model="d.selectedVoucher" ng-change="console.log(d.selectedVoucher)" ng-options="v.idVoucher as v.title for v in d.vouchers"></select>
+			</label>
+		</div>
+		<div class="padding">
+			<button class="button button-block button-positive" ng-click="offerVoucher()">
+				Offer this voucher	
+			</button>
+		</div>
+	</ion-content>
+</ion-modal-view>

@@ -26,6 +26,11 @@ marketplace.run(function($ionicPlatform, $log, $rootScope, MarketplaceStorage) {
     MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Users (idUser INTEGER PRIMARY KEY AUTOINCREMENT, firstname VARCHAR, lastname VARCHAR, email VARCHAR, username VARCHAR UNIQUE, password VARCHAR, isLoggedIn INTEGER)', []);
     MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Vouchers (idVoucher INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, shop VARCHAR, reduction INTEGER, duration INTEGER, quantity INTEGER, creator_id INTEGER, FOREIGN KEY(creator_id) REFERENCES Users(idUser))', []);
     MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Users_Vouchers (id INTEGER PRIMARY KEY AUTOINCREMENT, users_idUser INTEGER, vouchers_idVoucher INTEGER, FOREIGN KEY(users_idUser) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))', []);
+    MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Offers (idOffer INTEGER PRIMARY KEY AUTOINCREMENT, users_idUser INTEGER, vouchers_idVoucher INTEGER, FOREIGN KEY(users_idUser) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))', []);
+    MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Requests (idRequest INTEGER PRIMARY KEY AUTOINCREMENT, users_idUser INTEGER, vouchers_idVoucher INTEGER, FOREIGN KEY(users_idUser) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))', []);
+    MarketplaceStorage.executeQuery('CREATE TABLE IF NOT EXISTS Notifications (idNotification INTEGER PRIMARY KEY AUTOINCREMENT, message VARCHAR, vouchers_idVoucher INTEGER, senderId INTEGER, receiverId INTEGER, type VARCHAR, isRead INTEGER, FOREIGN KEY(senderId) REFERENCES Users(idUser), FOREIGN KEY(receiverId) REFERENCES Users(idUser), FOREIGN KEY(vouchers_idVoucher) REFERENCES Vouchers(idVoucher))', []);
+
+    
 
     //populate database
     //some users
@@ -45,11 +50,17 @@ marketplace.run(function($ionicPlatform, $log, $rootScope, MarketplaceStorage) {
         MarketplaceStorage.executeQuery('INSERT INTO Vouchers(title, shop, reduction, duration, quantity, creator_id) VALUES(?, ?, ?, ?, ?, ?)', ["No outfit is complete without nice shoes", "Shoe Store", 40, 48, 25, 5]);
         MarketplaceStorage.executeQuery('INSERT INTO Vouchers(title, shop, reduction, duration, quantity, creator_id) VALUES(?, ?, ?, ?, ?, ?)', ["Get smart with a smart watch", "Gadget store", 35, 48, 25, 4]);
         MarketplaceStorage.executeQuery('INSERT INTO Vouchers(title, shop, reduction, duration, quantity, creator_id) VALUES(?, ?, ?, ?, ?, ?)', ["Go see the world like you always dreamed", "Travel agency", 25, 30, 15, 3]);
+        MarketplaceStorage.executeQuery('INSERT INTO Users_Vouchers(users_idUser, vouchers_idVoucher) VALUES(?, ?)', [1, 1]);
+        MarketplaceStorage.executeQuery('INSERT INTO Users_Vouchers(users_idUser, vouchers_idVoucher) VALUES(?, ?)', [1, 2]);
+        MarketplaceStorage.executeQuery('INSERT INTO Users_Vouchers(users_idUser, vouchers_idVoucher) VALUES(?, ?)', [1, 5]);
       }
+
     })
   })
 })
 .config(function($ionicConfigProvider) {
-  $ionicConfigProvider.backButton.previousTitleText(false)
+  $ionicConfigProvider.backButton.previousTitleText(false);
   $ionicConfigProvider.backButton.text('');
+  $ionicConfigProvider.scrolling.jsScrolling(false);
+  $ionicConfigProvider.views.maxCache(3);
 });

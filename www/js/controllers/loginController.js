@@ -2,14 +2,16 @@
 * @Author: jad
 * @Date:   2017-02-09 10:36:03
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 15:34:14
+* @Last Modified time: 2017-02-12 21:20:16
 */
 
 'use strict';
-controllers.controller("LoginController", function($scope, $state, $ionicSideMenuDelegate, $rootScope, $log, MarketplaceStorage, $cordovaToast, ObjectService) {
-	$scope.$on('$ionicView.enter', function(event, config) {
+controllers.controller("LoginController", function($scope, $state, $ionicSideMenuDelegate, $rootScope, $log, MarketplaceStorage, $cordovaToast, ObjectService, $ionicHistory) {
+	$scope.$on('$ionicView.beforeEnter', function(event, config) {
 		$ionicSideMenuDelegate.canDragContent(false);
 		$rootScope.showMenuIcon = false;
+		$ionicHistory.clearHistory();
+		config.enableBack = false;
 	});
 
 	$scope.loginData = {};

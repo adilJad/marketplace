@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 10:54:00
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 19:56:28
+* @Last Modified time: 2017-02-13 10:30:13
 */
 
 'use strict';
@@ -15,8 +15,16 @@ controllers.controller('AppController', function($scope, $timeout, MarketplaceSt
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  $scope.$on('$ionicView.enter', function(e) {
+    MarketplaceStorage.executeQuery("SELECT * FROM Users WHERE isLoggedIn = 1").then(function(res) {
+      if(res.rows.length > 0) {
+        $scope.user = res.rows.item(0);
+        MarketplaceStorage.executeQuery("SELECT COUNT(*) AS c FROM Notifications WHERE isRead = 0 AND receiverId = ?", [$scope.user.idUser]).then(function(res) {
+            $scope.notificationsCount = res.rows.item(0).c;
+        });
+      }
+    })
+  });
 
   	$scope.inClientMode = true;
 
@@ -25,18 +33,16 @@ controllers.controller('AppController', function($scope, $timeout, MarketplaceSt
   	$scope.switchToStore = function() {
  		
   		if($scope.inClientMode) {
-		  	MarketplaceStorage.executeQuery("SELECT * FROM Users WHERE isLoggedIn = 1").then(function(res) {
-				$scope.user = res.rows.item(0);
-		  		MarketplaceStorage.executeQuery("SELECT COUNT(*) AS c FROM Vouchers WHERE creator_id = ?", [$scope.user.idUser]).then(function(res) {
+        MarketplaceStorage.executeQuery("SELECT COUNT(*) AS c FROM Vouchers WHERE creator_id = ?", [$scope.user.idUser]).then(function(res) {
 		  			if(res.rows.item(0).c == 0) {
 		  				$state.go("app.newVoucher");
 		  			} else {
 		  				$state.go("app.myVouchers");
 		  			}
-		  		});
 		  	});
+		  	
   		} else {
-			$state.go("app.browse");
+        $state.go("app.browse");
   		}
   		console.log($scope.inClientMode);
   		$scope.inClientMode = !$scope.inClientMode;

@@ -2,7 +2,7 @@
 * @Author: jad
 * @Date:   2017-02-09 11:09:45
 * @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 15:40:48
+* @Last Modified time: 2017-02-12 20:10:12
 */
 
 'use strict';
@@ -33,7 +33,6 @@ controllers.controller("VouchersController", function($scope, $ionicSideMenuDele
 		$scope.confirmDelete.then(function(res) {
 			if(res) {
 				MarketplaceStorage.executeQuery("DELETE FROM Users_Vouchers WHERE id = ? ", [$scope.data.vouchers[i].id]).then(function(res) {
-
 					var q = $scope.data.vouchers[i].quantity + 1;
 					var id = $scope.data.vouchers[i].idVoucher;
 					$scope.data.vouchers.splice(i, 1);
