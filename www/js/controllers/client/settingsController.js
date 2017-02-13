@@ -1,10 +1,3 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 11:09:31
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 16:02:40
-*/
-
 'use strict';
 
 controllers.controller("SettingsController", function($scope, $state, $rootScope, $ionicSideMenuDelegate, MarketplaceStorage, $ionicPopup, $cordovaToast) {

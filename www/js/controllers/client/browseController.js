@@ -1,10 +1,3 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 10:34:21
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 14:35:42
-*/
-
 'use strict';
 
 controllers.controller("BrowseController", function($scope, $state, $ionicSideMenuDelegate, $rootScope, $log, MarketplaceStorage, ObjectService, $stateParams, $ionicPopup, $cordovaToast) {

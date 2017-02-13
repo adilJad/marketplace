@@ -1,3 +1,21 @@
-<ion-modal-view>
-	
+<ion-modal-view ng-controller="NewRequestController">
+	<ion-header-bar class= "headerModal bar bar-header">
+		<h2 class="title">Publish new request</h2>
+		<button class="button button-clear btn-cancel" ng-click="hideModal()">Cancel</button>
+	</ion-header-bar>
+	<ion-content has-subheader="false">
+		<div class="list">
+			<label class="item item-input item-select">
+			<div class="input-label">
+				Shops
+			</div>
+			<select ng-model="d.selectedShop" ng-change="console.log(d.selectedShop)" ng-options="s.id as s.shop for s in d.shops"></select>
+			</label>
+		</div>
+		<div class="padding">
+			<button class="button button-block button-positive" ng-click="publishRequest()">
+				Publish this request	
+			</button>
+		</div>
+	</ion-content>
 </ion-modal-view>

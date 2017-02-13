@@ -1,12 +1,4 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 11:01:40
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 20:15:28
-*/
-
 'use strict';
-
 controllers.controller('MyVouchersController', function($scope, $ionicSideMenuDelegate, $rootScope, MarketplaceStorage, $ionicPopup) {
 	$scope.$on('$ionicView.beforeEnter', function(event, config) {
 		config.enableBack = false;

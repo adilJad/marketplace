@@ -1,12 +1,4 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 10:54:00
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-13 10:30:13
-*/
-
 'use strict';
-
 var controllers = angular.module('marketplace.controllers', []);
 
 controllers.controller('AppController', function($scope, $timeout, MarketplaceStorage, $state) {

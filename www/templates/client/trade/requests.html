@@ -1,8 +1,21 @@
 <ion-view view-title="Requests">
 	<ion-nav-buttons side="secondary">
-		<button class="button button-icon ion-plus-round" ng-click="doSomething()"></button>
+		<button class="button button-icon ion-plus-round" ng-click="newRequest()"></button>
 	</ion-nav-buttons>
 	<ion-content>
-		
+		<div class="empty" ng-show="data.requests.length == 0">There are no requests at the moment</div>
+		<div class="list card" ng-repeat="r in data.requests track by $index">
+		    <div class="item item-avatar">
+		      <img ng-src="img/{{r.firstname}}_{{r.lastname}}.jpeg">
+		      <h2>{{r.firstname}} {{r.lastname}}</h2>
+		      <!-- <p>Expires in {{voucher.duration}} Hours</p> -->
+		    </div>
+		    <div class="item item-body">
+		      <p>has requested a Voucher for the shop: "{{r.shop}}" </p>
+		      <p>
+		        <a class="request-btn" ng-click="answerRequest($index)" class="subdued">Reply</a>
+		      </p>
+		    </div>
+		</div>
 	</ion-content>
 </ion-view>

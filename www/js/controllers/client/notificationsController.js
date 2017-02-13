@@ -1,10 +1,3 @@
-/*
-* @Author: jad
-* @Date:   2017-02-13 00:08:07
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-13 10:37:35
-*/
-
 'use strict';
 controllers.controller("NotificationsController", function($scope, MarketplaceStorage, $ionicPopup, $ionicSideMenuDelegate, $rootScope, $cordovaToast) {
 
@@ -70,6 +63,7 @@ controllers.controller("NotificationsController", function($scope, MarketplaceSt
 	       				var message =  $scope.data.user.firstname + " " + $scope.data.user.lastname + " has rejected your request";
 	       				var q = "INSERT INTO Notifications(message, vouchers_idVoucher, senderId, receiverId, type, isRead) VALUES(?, ?, ?, ?, ?, ?)";
 	       				MarketplaceStorage.executeQuery(q, [message, $scope.data.notifications[i].vouchers_idVoucher, $scope.data.notifications[i].receiverId, $scope.data.notifications[i].senderId,"offer_rejected", 0]).then(function() {
+	       					$cordovaToast.show("Your answer has been sent", 'long', 'bottom');
 	       					MarketplaceStorage.executeQuery("UPDATE Notifications SET isRead = 1 WHERE idNotification = ?", [$scope.data.notifications[i].idNotification]).then(function() {
 	       						$scope.data.notifications[i].isRead = 1;
 	       					})

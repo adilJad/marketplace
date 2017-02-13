@@ -1,10 +1,3 @@
-/*
-* @Author: jad
-* @Date:   2017-02-12 21:42:40
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-13 10:05:35
-*/
-
 'use strict';
 
 controllers.controller("TradeOffersController", function($scope, MarketplaceStorage, $ionicModal, $ionicSideMenuDelegate, $rootScope, $cordovaToast) {

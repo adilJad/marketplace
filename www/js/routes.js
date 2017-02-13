@@ -1,10 +1,3 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 10:27:47
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-13 08:49:14
-*/
-
 'use strict';
 marketplace.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider

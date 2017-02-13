@@ -1,10 +1,3 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 11:09:45
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 20:10:12
-*/
-
 'use strict';
 
 controllers.controller("VouchersController", function($scope, $ionicSideMenuDelegate, $rootScope, MarketplaceStorage, $ionicPopup) {

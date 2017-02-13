@@ -1,12 +1,4 @@
-/*
-* @Author: jad
-* @Date:   2017-02-09 11:10:13
-* @Last Modified by:   jad
-* @Last Modified time: 2017-02-12 18:42:00
-*/
-
 'use strict';
-
 controllers.controller("SignupController", function($scope, $state, $log, $ionicSideMenuDelegate, $rootScope, $cordovaToast, MarketplaceStorage, $ionicPopup) {
 	$scope.$on('$ionicView.enter', function(e) {
 		$ionicSideMenuDelegate.canDragContent(false);
