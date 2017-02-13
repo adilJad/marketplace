@@ -17,7 +17,7 @@ controllers.controller("NewRequestController", function($scope, MarketplaceStora
 	});
 
 	$scope.publishRequest = function() {
-		if($scope.d.selectedShop > 0) {
+		if($scope.d.selectedShop >= 0) {
 			console.log($scope.d.shops);
 			console.log($scope.d.selectedShop);
 			var q = "INSERT INTO Requests(shop, users_idUser) VALUES(?, ?)";

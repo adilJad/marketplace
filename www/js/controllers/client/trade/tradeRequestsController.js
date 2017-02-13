@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller("TradeRequestsController", function($scope, MarketplaceStorage, $ionicModal, $ionicSideMenuDelegate, $rootScope, $cordovaToast) {
+controllers.controller("TradeRequestsController", function($scope, MarketplaceStorage, $ionicModal, $ionicSideMenuDelegate, $rootScope, $cordovaToast, $ionicPopup) {
 	
 	$scope.$on('$ionicView.beforeEnter', function(event, config) {
 		// config.enableBack = false;
@@ -32,9 +32,25 @@ controllers.controller("TradeRequestsController", function($scope, MarketplaceSt
 	}
 
 	$scope.answerRequest = function(i) {
-		var message = $scope.data.user.firstname + " " + $scope.data.user.lastname + " has asked to receive your offer \"" + $scope.data.offers[i].title + "\" with discount of -" + $scope.data.offers[i].reduction + "% in the shop: \"" + $scope.data.offers[i].shop + "\"";
-		MarketplaceStorage.executeQuery("INSERT INTO Notifications(message, vouchers_idVoucher, senderId, receiverId, type, isRead) VALUES(?, ?, ?, ?, ?, ?)", [message, $scope.data.offers[i].idVoucher, $scope.data.user.idUser, $scope.data.offers[i].idUser, "offer", 0]).then(function() {
-			$cordovaToast.show("A request has been sent to " + $scope.data.offers[i].firstname + " " + $scope.data.offers[i].lastname, 'long', 'bottom');
+		MarketplaceStorage.executeQuery("SELECT * FROM Vouchers AS v, Users_Vouchers AS uv WHERE v.shop = ? AND uv.users_idUser = ? AND uv.vouchers_idVoucher = v.idVoucher", [$scope.data.requests[i].shop, $scope.data.user.idUser]).then(function(res) {
+			if(res.rows.length == 0) {
+				$cordovaToast.show("You have no vouchers for this requests", 'long', 'bottom');
+			} else {
+				$scope.confirmRequest = $ionicPopup.confirm({
+			       title: 'Offer voucher',
+			       template: "Are you sure you want to Offer " + res.rows.item(0).title + " for this request?"
+		     	});
+		     	var voucher = res.rows.item(0);
+				$scope.confirmRequest.then(function(res) {
+					if(res) {
+						var message = $scope.data.user.firstname + " " + $scope.data.user.lastname + " has offered for  your request, the voucher \"" + voucher.title + "\" with discount of -" + voucher.reduction + "% in the shop: \"" + $scope.data.requests[i].shop + "\"";
+
+						MarketplaceStorage.executeQuery("INSERT INTO Notifications(message, vouchers_idVoucher, senderId, receiverId, type, isRead) VALUES(?, ?, ?, ?, ?, ?)", [message, voucher.idVoucher, $scope.data.user.idUser, $scope.data.requests[i].idUser, "request", 0]).then(function() {
+							$cordovaToast.show("An offer has been sent to " + $scope.data.requests[i].firstname + " " + $scope.data.requests[i].lastname, 'long', 'bottom');
+						})
+					}
+				})
+			}
 		})
 	}
 })

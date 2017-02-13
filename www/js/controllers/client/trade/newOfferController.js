@@ -13,7 +13,7 @@ controllers.controller("NewOfferController", function($scope, MarketplaceStorage
 	});
 
 	$scope.offerVoucher = function() {
-		if($scope.d.selectedVoucher > 0) {
+		if($scope.d.selectedVoucher >= 0) {
 			var q = "INSERT INTO Offers(users_idUser, vouchers_idVoucher) VALUES(?, ?)";
 			MarketplaceStorage.executeQuery(q, [$scope.data.user.idUser, $scope.d.selectedVoucher]).then(function(res) {
 				$cordovaToast.show("You offer has been published", 'long', 'bottom');
