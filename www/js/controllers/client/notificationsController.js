@@ -20,21 +20,24 @@ controllers.controller("NotificationsController", function($scope, MarketplaceSt
 	});
 
 	$scope.action = function(i) {
-		var type = $scope.data.notifications[i].type;
-		switch(type){
-			case "offer_rejected":
-				displayAnswer(i);
-				break;
-			case "offer_accepted":
-				displayAnswer(i);
-				break;
-			case "offer":
-				anwserOffer(i);
-				break;
-			case "request":
-				console.log("request");
-				break
-
+		if($scope.data.notifications[i].isRead == 0) {
+			var type = $scope.data.notifications[i].type;
+			switch(type){
+				case "offer_rejected":
+					displayAnswer(i);
+					break;
+				case "offer_accepted":
+					displayAnswer(i);
+					break;
+				case "offer":
+					anwserOffer(i);
+					break;
+				case "request":
+					answerRequest(i)
+					break
+			}
+		} else {
+			$cordovaToast.show("Your have already replied to this!", 'long', 'bottom');
 		}
 	}
 
@@ -85,8 +88,47 @@ controllers.controller("NotificationsController", function($scope, MarketplaceSt
 		       				});
 			          	})
 			        }
-			      }
-			    ]
+			    }
+			]
+     	});
+	}
+
+	function answerRequest(i) {
+		$scope.actionsPopup = $ionicPopup.show({
+			title: 'Respond to this offer',
+			template: $scope.data.notifications[i].message,
+			scope: $scope,
+			buttons: [
+	       		{ 
+	       			text: 'Refuse',
+	       			onTap: function(e) {
+	       				var message =  $scope.data.user.firstname + " " + $scope.data.user.lastname + " has rejected your offer";
+	       				var q = "INSERT INTO Notifications(message, vouchers_idVoucher, senderId, receiverId, type, isRead) VALUES(?, ?, ?, ?, ?, ?)";
+	       				MarketplaceStorage.executeQuery(q, [message, $scope.data.notifications[i].vouchers_idVoucher, $scope.data.notifications[i].receiverId, $scope.data.notifications[i].senderId,"offer_rejected", 0]).then(function() {
+	       					$cordovaToast.show("Your answer has been sent", 'long', 'bottom');
+	       					MarketplaceStorage.executeQuery("UPDATE Notifications SET isRead = 1 WHERE idNotification = ?", [$scope.data.notifications[i].idNotification]).then(function() {
+	       						$scope.data.notifications[i].isRead = 1;
+	       					})
+	       				})
+	       			}
+	       		},
+	       		{
+			        text: '<b>Accept</b>',
+			        type: 'button-positive',
+			        onTap: function(e) {
+			          	var q = "UPDATE Users_Vouchers SET users_idUser = ? WHERE vouchers_idVoucher = ? AND users_idUser = ?";
+			          	MarketplaceStorage.executeQuery(q, [$scope.data.notifications[i].receiverId, $scope.data.notifications[i].vouchers_idVoucher, $scope.data.notifications[i].senderId]).then(function(res) {
+			          		var m =  $scope.data.user.firstname + " " + $scope.data.user.lastname + " has accepted your offer, and says thank you!";
+			          		var q1 = "INSERT INTO Notifications(message, vouchers_idVoucher, senderId, receiverId, type, isRead) VALUES(?, ?, ?, ?, ?, ?)";
+			          		MarketplaceStorage.executeQuery(q1, [m, $scope.data.notifications[i].vouchers_idVoucher, $scope.data.notifications[i].receiverId, $scope.data.notifications[i].senderId,"offer_accepted", 0]).then(function() {
+	       						MarketplaceStorage.executeQuery("UPDATE Notifications SET isRead = 1 WHERE idNotification = ?", [$scope.data.notifications[i].idNotification]).then(function() {
+	       							$scope.data.notifications[i].isRead = 1;
+		       					});
+		       				});
+			          	})
+			        }
+			    }
+			]
      	});
 	}
 })

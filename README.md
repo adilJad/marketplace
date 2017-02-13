@@ -4,4 +4,4 @@ This app is a marketplace where users can find and get discount vouchers for var
 
 * the config of cordova/ionic is in [config.xml](./config.xml)
 
-* npm dependencies are is [package.json](./package.json)
+* npm dependencies are in [package.json](./package.json)
