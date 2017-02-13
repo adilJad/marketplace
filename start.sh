@@ -2,13 +2,16 @@
 
 app=com.mobile.marketplace
 
-pathToAPK=platforms/android/build/outputs/apk/android-debug.apk
+pathToAPK=./platforms/android/build/outputs/apk/android-debug.apk
 
 echo "Installing plugins & platform from package.json"
 ionic state restore
 
 echo "Running Ionic Build"
-ionic build
+ionic build android
+
+echo "Connected devices"
+adb devices | grep -v List | cut -f 1
 
 echo "Started to loop over the connected android devices"
 for SERIAL in $(adb devices | grep -v List | cut -f 1);
