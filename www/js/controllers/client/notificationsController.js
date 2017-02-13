@@ -84,7 +84,7 @@ controllers.controller("NotificationsController", function($scope, MarketplaceSt
 			          		MarketplaceStorage.executeQuery(q1, [m, $scope.data.notifications[i].vouchers_idVoucher, $scope.data.notifications[i].receiverId, $scope.data.notifications[i].senderId,"offer_accepted", 0]).then(function() {
 	       						MarketplaceStorage.executeQuery("UPDATE Notifications SET isRead = 1 WHERE idNotification = ?", [$scope.data.notifications[i].idNotification]).then(function() {
 	       							$scope.data.notifications[i].isRead = 1;
-	       							MarketplaceStorage.executeQuery("DELETE FROM Offers WHERE users_idUser = ? AND vouchers_idVoucher = ?", [$scope.data.user.idUser, $scope.data.notifications[i].vouchers_idVouche]).then(function() {
+	       							MarketplaceStorage.executeQuery("DELETE FROM Offers WHERE users_idUser = ? AND vouchers_idVoucher = ?", [$scope.data.user.idUser, $scope.data.notifications[i].vouchers_idVoucher]).then(function() {
 
 	       							})
 		       					});
